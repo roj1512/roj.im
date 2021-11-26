@@ -137,12 +137,30 @@
     <script>
       const style = getComputedStyle(document.documentElement)
 
+      let places = [
+        "https://github.com/rojserbest",
+        "https://t.me/rojserbest",
+        "https://twitter.com/Roj_im",
+      ]
+
+      let count = 0
+
       document.addEventListener("click", () => {
         const dark = style.getPropertyValue("--dark")
         const light = style.getPropertyValue("--light")
 
         document.documentElement.style.setProperty("--dark", light)
         document.documentElement.style.setProperty("--light", dark)
+
+        count++
+
+        if (count != 0 && count % 2 == 0 && places.length != 0) {
+          const place = places[Math.floor(Math.random() * places.length)]
+
+          places.splice(places.indexOf(place), 1)
+
+          window.open(place, "_blank")
+        }
       })
     </script>
   </body>
