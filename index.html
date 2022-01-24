@@ -6,162 +6,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
       :root {
-        --dark: #222222;
-        --light: #eeeeee;
+        --dark-background: linear-gradient(180deg, #222, #000);
+        --light-background: linear-gradient(180deg, #eee, #fff);
+
+        --dark-fill: url(#dark);
+        --light-fill: url(#light);
       }
 
-      @media (prefers-color-scheme: light) {
+      @media (prefers-color-scheme: dark) {
         :root {
-          --dark: #eeeeee;
-          --light: #222222;
+          --dark-background: linear-gradient(180deg, #eee, #fff);
+          --light-background: linear-gradient(180deg, #222, #000);
+
+          --dark-fill: url(#light);
+          --light-fill: url(#dark);
         }
       }
 
       * {
         margin: 0;
         padding: 0;
-        overflow: hidden;
-        user-select: none;
         box-sizing: border-box;
-        transition-property: fill background-color;
-        transition-duration: 500ms;
       }
 
       main {
-        width: 100%;
-        height: 100vh;
-      }
-
-      .part {
-        width: 50%;
-        z-index: -1;
-        height: 100%;
-        position: fixed;
-      }
-
-      .left {
-        background-color: var(--dark);
-      }
-
-      .right {
-        right: 0;
-        background-color: var(--light);
-      }
-
-      .flex {
-        width: 100%;
-        height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+
+        width: 100%;
+        height: 100vh;
+
+        background: var(--dark-background);
+      }
+
+      section {
+        right: 0;
+        position: fixed;
+
+        width: 50%;
+        height: 100vh;
+
+        background: var(--light-background);
       }
 
       svg {
-        width: 130px;
-      }
-
-      .dark {
-        fill: var(--dark);
+        z-index: 10;
+        width: 200px;
       }
 
       .light {
-        fill: var(--light);
+        fill: var(--light-fill);
+      }
+
+      .dark {
+        fill: var(--dark-fill);
       }
     </style>
   </head>
   <body>
     <main>
-      <div class="left part"></div>
-      <div class="right part"></div>
-      <div class="flex">
-        <svg
-          width="1000"
-          height="1000"
-          viewBox="0 0 1000 1000"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect width="500" height="1000" fill="#222222" class="dark" />
-          <rect
-            x="500"
-            width="500"
-            height="1000"
-            fill="#EEEEEE"
-            class="light"
-          />
-          <mask
-            id="mask0_307_18"
-            style="mask-type: alpha"
-            maskUnits="userSpaceOnUse"
-            x="500"
-            y="0"
-            width="500"
-            height="1000"
+      <section></section>
+      <svg
+        width="952"
+        height="905"
+        viewBox="0 0 952 905"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          class="light"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M588.257 345.492L476 0V690.983L769.893 904.508L657.636 559.017L951.528 345.492H588.257Z"
+          fill="url(#light)"
+        />
+        <path
+          class="dark"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M476 0L363.743 345.492H0.47168L294.364 559.017L182.107 904.508L476 690.983V0Z"
+          fill="url(#dark)"
+        />
+        <defs>
+          <linearGradient
+            id="light"
+            x1="476"
+            y1="0"
+            x2="476"
+            y2="1000"
+            gradientUnits="userSpaceOnUse"
           >
-            <rect
-              x="500"
-              width="500"
-              height="1000"
-              fill="#EEEEEE"
-              class="light"
-            />
-          </mask>
-          <g mask="url(#mask0_307_18)">
-            <path
-              d="M500 0L612.257 345.492H975.528L681.636 559.017L793.893 904.508L500 690.983L206.107 904.508L318.364 559.017L24.4717 345.492H387.743L500 0Z"
-              fill="#222222"
-              class="dark"
-            />
-          </g>
-          <mask
-            id="mask1_307_18"
-            style="mask-type: alpha"
-            maskUnits="userSpaceOnUse"
-            x="0"
-            y="0"
-            width="500"
-            height="1000"
+            <stop stop-color="#222" />
+            <stop offset="1" stop-color="#000" />
+          </linearGradient>
+          <linearGradient
+            id="dark"
+            x1="476"
+            y1="0"
+            x2="476"
+            y2="1000"
+            gradientUnits="userSpaceOnUse"
           >
-            <rect width="500" height="1000" fill="#222222" class="dark" />
-          </mask>
-          <g mask="url(#mask1_307_18)">
-            <path
-              d="M500 0L612.257 345.492H975.528L681.636 559.017L793.893 904.508L500 690.983L206.107 904.508L318.364 559.017L24.4717 345.492H387.743L500 0Z"
-              fill="#EEEEEE"
-              class="light"
-            />
-          </g>
-        </svg>
-      </div>
+            <stop stop-color="#eee" />
+            <stop offset="1" stop-color="#fff" />
+          </linearGradient>
+        </defs>
+      </svg>
     </main>
+
     <script>
-      const style = getComputedStyle(document.documentElement)
+      let count = 0;
 
       let places = [
-        "https://github.com/roj1512",
         "https://t.me/roj1512",
+        "https://github.com/roj1512",
         "https://twitter.com/roj1512",
-      ]
+      ];
 
-      let count = 0
+      const style = getComputedStyle(document.documentElement);
 
       document.addEventListener("click", () => {
-        const dark = style.getPropertyValue("--dark")
-        const light = style.getPropertyValue("--light")
+        const darkBackground = style.getPropertyValue("--dark-background");
+        const lightBackground = style.getPropertyValue("--light-background");
 
-        document.documentElement.style.setProperty("--dark", light)
-        document.documentElement.style.setProperty("--light", dark)
+        const darkFill = style.getPropertyValue("--dark-fill");
+        const lightFill = style.getPropertyValue("--light-fill");
 
-        count++
+        document.documentElement.style.setProperty(
+          "--dark-background",
+          lightBackground
+        );
+
+        document.documentElement.style.setProperty(
+          "--light-background",
+          darkBackground
+        );
+
+        document.documentElement.style.setProperty("--dark-fill", lightFill);
+        document.documentElement.style.setProperty("--light-fill", darkFill);
+
+        count++;
 
         if (count != 0 && count % 2 == 0 && places.length != 0) {
-          const place = places[Math.floor(Math.random() * places.length)]
+          const place = places[Math.floor(Math.random() * places.length)];
 
-          places.splice(places.indexOf(place), 1)
+          places.splice(places.indexOf(place), 1);
 
-          window.open(place, "_blank")
+          window.open(place, "_blank");
         }
-      })
+      });
     </script>
   </body>
 </html>
