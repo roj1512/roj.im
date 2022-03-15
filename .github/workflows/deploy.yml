@@ -9,6 +9,9 @@ jobs:
     steps:
       - name: Get into the code
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+          fetch-depth: 0
 
       - name: Install the dependencies
         run: npm install -g stylus
@@ -16,9 +19,14 @@ jobs:
       - name: Build the app
         run: stylus roj.styl -o dist/roj.css
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Commit files
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "[Build]" -a
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          keep_files: true
+          branch: ${{ github.ref }}
