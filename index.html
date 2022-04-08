@@ -4,30 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WBJEWHJT2K"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-WBJEWHJT2K"
+    ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-      gtag('config', 'G-WBJEWHJT2K');
+      gtag("config", "G-WBJEWHJT2K");
     </script>
     <style>
       :root {
-        --dark-background: linear-gradient(180deg, #222, #000);
-        --light-background: linear-gradient(180deg, #eee, #fff);
-
-        --dark-fill: url(#dark);
-        --light-fill: url(#light);
+        --dark: #222222;
+        --light: #eeeeee;
       }
 
       @media (prefers-color-scheme: dark) {
         :root {
-          --dark-background: linear-gradient(180deg, #eee, #fff);
-          --light-background: linear-gradient(180deg, #222, #000);
-
-          --dark-fill: url(#light);
-          --light-fill: url(#dark);
+          --dark: #eeeeee;
+          --light: #222222;
         }
       }
 
@@ -35,6 +34,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        transition-duration: 500ms;
       }
 
       main {
@@ -45,7 +45,7 @@
         width: 100%;
         height: 100vh;
 
-        background: var(--dark-background);
+        background-color: var(--dark);
       }
 
       section {
@@ -56,7 +56,7 @@
         width: 50%;
         height: 100vh;
 
-        background: var(--light-background);
+        background-color: var(--light);
       }
 
       svg {
@@ -65,11 +65,11 @@
       }
 
       .light {
-        fill: var(--light-fill);
+        fill: var(--light);
       }
 
       .dark {
-        fill: var(--dark-fill);
+        fill: var(--dark);
       }
 
       #sc {
@@ -94,43 +94,19 @@
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          class="light"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
-          d="M588.257 345.492L476 0V690.983L769.893 904.508L657.636 559.017L951.528 345.492H588.257Z"
-          fill="url(#light)"
-        />
-        <path
           class="dark"
           fill-rule="evenodd"
           clip-rule="evenodd"
-          d="M476 0L363.743 345.492H0.47168L294.364 559.017L182.107 904.508L476 690.983V0Z"
-          fill="url(#dark)"
+          d="M588.257 345.492L476 0V690.983L769.893 904.508L657.636 559.017L951.528 345.492H588.257Z"
+          fill="#222222"
         />
-        <defs>
-          <linearGradient
-            id="light"
-            x1="476"
-            y1="0"
-            x2="476"
-            y2="1000"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stop-color="#222" />
-            <stop offset="1" stop-color="#000" />
-          </linearGradient>
-          <linearGradient
-            id="dark"
-            x1="476"
-            y1="0"
-            x2="476"
-            y2="1000"
-            gradientUnits="userSpaceOnUse"
-          >
-            <stop stop-color="#eee" />
-            <stop offset="1" stop-color="#fff" />
-          </linearGradient>
-        </defs>
+        <path
+          class="light"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M476 0L363.743 345.492H0.47168L294.364 559.017L182.107 904.508L476 690.983V0Z"
+          fill="#eeeeee"
+        />
       </svg>
     </main>
 
@@ -141,30 +117,17 @@
         "https://t.me/roj1512",
         "https://github.com/roj1512",
         "https://twitter.com/roj1512",
-        "https://stackoverflow.com/users/10379728/roj1512"
+        "https://stackoverflow.com/users/10379728/roj1512",
       ];
 
       const style = getComputedStyle(document.documentElement);
 
       function swapColors() {
-        const darkBackground = style.getPropertyValue("--dark-background");
-        const lightBackground = style.getPropertyValue("--light-background");
+        const dark = style.getPropertyValue("--dark");
+        const light = style.getPropertyValue("--light");
 
-        const darkFill = style.getPropertyValue("--dark-fill");
-        const lightFill = style.getPropertyValue("--light-fill");
-
-        document.documentElement.style.setProperty(
-          "--dark-background",
-          lightBackground
-        );
-
-        document.documentElement.style.setProperty(
-          "--light-background",
-          darkBackground
-        );
-
-        document.documentElement.style.setProperty("--dark-fill", lightFill);
-        document.documentElement.style.setProperty("--light-fill", darkFill);
+        document.documentElement.style.setProperty("--dark", light);
+        document.documentElement.style.setProperty("--light", dark);
       }
 
       document.addEventListener("click", () => {
